@@ -1,5 +1,4 @@
 streamlit == 0.86.0
 pandas == 1.2.5
 joblib == 1.0.1
-bz2
 pickle
