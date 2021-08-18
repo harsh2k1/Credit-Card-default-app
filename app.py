@@ -7,9 +7,10 @@ from sklearn.ensemble import RandomForestClassifier
 import pandas as pd
 
 # Instantiate the model
+X_train_df = pickle.load(open('X_train_df.pkl', 'rb'))
+y_train_df = pickle.load(open('y_train_df.pkl', 'rb'))
+rf_clf = pickle.load(open('rf_model.pkl','rb'))
 
-rf_fit_model = pickle.load(open('rf_fit_model.pkl' , 'rb'))
-#model = joblib.load(r'C:\Users\Harshpreet Singh\Desktop\PVT STUFF\Projects\CreditCardDefaultApp\venv\RandomForest_tuned_final.pkl')
 st.title('Credit Card Default Predictor')
 bal = st.number_input(' Enter LIMIT_BAL: Amount of given credit in NT dollars (includes individual and family/supplementary credit)')
 sex = st.number_input('Enter SEX: Gender (1=male, 2=female)')
@@ -38,7 +39,8 @@ pay_amt1 = st.number_input('PAY_AMT1: Amount of previous payment in September, 2
 # • PAY_AMT6: Amount of previous payment in April, 2005 (NT dollar)
 pay_amt2 = pay_amt3 = pay_amt4 = pay_amt5 = pay_amt6 = 0
 # • default.payment.next.month: Default payment (1=yes, 0=no)
-y_pred = rf_fit_model.predict([[bal , sex , education , married , age , pay1 , pay2 , pay3 , pay4 , pay5 , pay6 , bill_amt1 , bill_amt2 , bill_amt3 , bill_amt4 , bill_amt5 , \
+model = rf_clf.fit(X_train_df , y_train_df)
+y_pred = model.predict([[bal , sex , education , married , age , pay1 , pay2 , pay3 , pay4 , pay5 , pay6 , bill_amt1 , bill_amt2 , bill_amt3 , bill_amt4 , bill_amt5 , \
     bill_amt6 , pay_amt1 , pay_amt2 , pay_amt3 , pay_amt4 , pay_amt5 , pay_amt6]])
 
 if st.button('predict'):
