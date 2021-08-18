@@ -1,9 +1,32 @@
 import streamlit as st
 import pickle
 import joblib
+import bz2
+import _pickle as cPickle
 from sklearn.ensemble import RandomForestClassifier
+import pandas as pd
+# def decompress_pickle(file):
+#     model = bz2.BZ2File(file, 'rb')
+#     model = cPickle.load(model)
+#     return model
+# model = decompress_pickle(r'C:\Users\Harshpreet Singh\Desktop\PVT STUFF\Projects\CreditCardDefaultApp\venv\compressed_dt_model.pbz2')
+# param_grid = {
+#     'max_depth': [60, 90, 110],
+#     'min_samples_leaf': [3, 4, 5],
+#     'min_samples_split': [8, 10, 12],
+#     'n_estimators': [100, 200, 300]
+# }
+
+# Instantiate the model
 clf_rf = RandomForestClassifier(max_depth=60 , min_samples_leaf=3 , min_samples_split=8 , n_estimators=300)
-# model = joblib.load(r'C:\Users\Harshpreet Singh\Desktop\PVT STUFF\Projects\CreditCardDefaultApp\venv\RandomForest_tuned_final.pkl')
+X_train = pickle.load(open('train.pkl' , 'rb'))
+X_train = pd.DataFrame(X_train)
+y_train = pickle.load(open('y_train.pkl' , 'rb'))
+y_train = pd.DataFrame(y_train)
+X_train_df = pickle.load(open('X_train_df.pkl', 'rb'))
+y_train_df = pickle.load(open('y_train_df.pkl', 'rb'))
+model = clf_rf.fit(X_train_df , y_train_df)
+#model = joblib.load(r'C:\Users\Harshpreet Singh\Desktop\PVT STUFF\Projects\CreditCardDefaultApp\venv\RandomForest_tuned_final.pkl')
 st.title('Credit Card Default Predictor')
 bal = st.number_input(' Enter LIMIT_BAL: Amount of given credit in NT dollars (includes individual and family/supplementary credit)')
 sex = st.number_input('Enter SEX: Gender (1=male, 2=female)')
