@@ -1,12 +1,12 @@
 import streamlit as st
 import pickle
 import joblib
-def decompress_pickle(file):
-    model = bz2.BZ2File(file, 'rb')
-    model = cPickle.load(model)
-    return model
-model = decompress_pickle(r'C:\Users\Harshpreet Singh\Desktop\PVT STUFF\Projects\CreditCardDefaultApp\venv\compressed_dt_model.pbz2')
-# model = joblib.load(r'C:\Users\Harshpreet Singh\Desktop\PVT STUFF\Projects\CreditCardDefaultApp\venv\RandomForest_tuned_final.pkl')
+# def decompress_pickle(file):
+#     model = bz2.BZ2File(file, 'rb')
+#     model = cPickle.load(model)
+#     return model
+# model = decompress_pickle(r'C:\Users\Harshpreet Singh\Desktop\PVT STUFF\Projects\CreditCardDefaultApp\venv\compressed_dt_model.pbz2')
+model = joblib.load(r'C:\Users\Harshpreet Singh\Desktop\PVT STUFF\Projects\CreditCardDefaultApp\venv\RandomForest_tuned_final.pkl')
 st.title('Credit Card Default Predictor')
 bal = st.number_input(' Enter LIMIT_BAL: Amount of given credit in NT dollars (includes individual and family/supplementary credit)')
 sex = st.number_input('Enter SEX: Gender (1=male, 2=female)')
