@@ -19,10 +19,10 @@ import pandas as pd
 
 # Instantiate the model
 clf_rf = RandomForestClassifier(max_depth=60 , min_samples_leaf=3 , min_samples_split=8 , n_estimators=300)
-X_train = pickle.load(open('train.pkl' , 'rb'))
-X_train = pd.DataFrame(X_train)
-y_train = pickle.load(open('y_train.pkl' , 'rb'))
-y_train = pd.DataFrame(y_train)
+# X_train = pickle.load(open('train.pkl' , 'rb'))
+# X_train = pd.DataFrame(X_train)
+# y_train = pickle.load(open('y_train.pkl' , 'rb'))
+# y_train = pd.DataFrame(y_train)
 X_train_df = pickle.load(open('X_train_df.pkl', 'rb'))
 y_train_df = pickle.load(open('y_train_df.pkl', 'rb'))
 model = clf_rf.fit(X_train_df , y_train_df)
