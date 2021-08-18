@@ -1,7 +1,9 @@
 import streamlit as st
 import pickle
 import joblib
-model = joblib.load(r'C:\Users\Harshpreet Singh\Desktop\PVT STUFF\Projects\CreditCardDefaultApp\venv\RandomForest_tuned_final.pkl')
+from sklearn.ensemble import RandomForestClassifier
+clf_rf = RandomForestClassifier(max_depth=60 , min_samples_leaf=3 , min_samples_split=8 , n_estimators=300)
+# model = joblib.load(r'C:\Users\Harshpreet Singh\Desktop\PVT STUFF\Projects\CreditCardDefaultApp\venv\RandomForest_tuned_final.pkl')
 st.title('Credit Card Default Predictor')
 bal = st.number_input(' Enter LIMIT_BAL: Amount of given credit in NT dollars (includes individual and family/supplementary credit)')
 sex = st.number_input('Enter SEX: Gender (1=male, 2=female)')
@@ -30,7 +32,7 @@ pay_amt1 = st.number_input('PAY_AMT1: Amount of previous payment in September, 2
 # • PAY_AMT6: Amount of previous payment in April, 2005 (NT dollar)
 pay_amt2 = pay_amt3 = pay_amt4 = pay_amt5 = pay_amt6 = 0
 # • default.payment.next.month: Default payment (1=yes, 0=no)
-y_pred = model.predict([[bal , sex , education , married , age , pay1 , pay2 , pay3 , pay4 , pay5 , pay6 , bill_amt1 , bill_amt2 , bill_amt3 , bill_amt4 , bill_amt5 , \
+y_pred = clf_rf.predict([[bal , sex , education , married , age , pay1 , pay2 , pay3 , pay4 , pay5 , pay6 , bill_amt1 , bill_amt2 , bill_amt3 , bill_amt4 , bill_amt5 , \
     bill_amt6 , pay_amt1 , pay_amt2 , pay_amt3 , pay_amt4 , pay_amt5 , pay_amt6]])
 
 if st.button('predict'):
